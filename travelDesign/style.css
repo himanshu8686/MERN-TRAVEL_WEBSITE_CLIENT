@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/** Registration form*/
+
+.account-wall{
+    height: auto;
+    background: #cecece;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 12px -1px #161617;
+}
+.input-group{
+    padding: 10px;
+}
