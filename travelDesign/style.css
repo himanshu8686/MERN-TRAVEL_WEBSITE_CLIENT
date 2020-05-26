@@ -14,3 +14,11 @@
 .input-group{
     padding: 10px;
 }
+
+/* upload product*/
+.icon-plus{
+    width: 100%;
+    height: auto;
+    border: 2px solid #8a8a8acc;
+    border-radius: 10px;
+}

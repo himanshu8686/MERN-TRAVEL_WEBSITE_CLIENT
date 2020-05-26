@@ -12,7 +12,10 @@ class HeaderComponent extends Component {
                 <div className="navbar-nav">
                     <a href="/" className="nav-item nav-link active"><i className="fas fa-home"></i>Home</a>
                 </div>
+
                 <div className="navbar-nav ml-auto">
+                    <a type="button" href="/upload" className="nav-item nav-link"><i className="fas fa-upload"></i>Upload
+                    </a>
                     <a type="button" href="/logout" className="nav-item nav-link"><i className="fas fa-power-off"></i>
                         Logout</a>
                 </div>

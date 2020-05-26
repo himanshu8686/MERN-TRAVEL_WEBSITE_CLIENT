@@ -13,6 +13,7 @@ import LogoutUser from './components/layouts/LogoutUser';
 import Protected from './components/utils/Protected';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
+import UploadProductPage from './components/forms/UploadProductPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                   <Route path="/login" component={LoginUser}/>
                   <Route path="/register" component={RegisterUser}/>
                   <Route path="/logout" component={LogoutUser}/>
+                  <Protected path="/upload" component={UploadProductPage}/>
                   <Protected path="/dashboard" component={Dashboard}/>
           </Switch>
       </Router>
