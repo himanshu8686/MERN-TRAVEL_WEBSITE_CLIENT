@@ -27,7 +27,7 @@ class FileUpload extends Component {
             alert('This file is too big try less than 5 mb');
         }
     }
-    
+
     if (acceptedFiles && acceptedFiles.length > 0) {
         const currentAcceptFile = acceptedFiles[0]
         const currentAcceptFileSize = currentAcceptFile.size
@@ -69,7 +69,7 @@ class FileUpload extends Component {
                         maxSize={imageMaxSize}
                     >
                     {({ getRootProps, getInputProps}) =>(
-                        <div className="col-md-6" {...getRootProps()}>
+                        <div className="col-md-6 selection-box" {...getRootProps()}>
                             <input {...getInputProps()} />
 
                                 <div className="icon-plus text-center">

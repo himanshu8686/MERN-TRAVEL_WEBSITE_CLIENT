@@ -2,7 +2,8 @@ import {
     GET_ERRORS,
     USER_SIGNUP,
     USER_LOGIN,
-    USER_LOGOUT
+    USER_LOGOUT,
+    GET_PRODUCTS
 } from './userActionsTypes';
 import axios from 'axios';
 import setAuthorizationToken from '../components/utils/setAuthorizationToken';
@@ -39,7 +40,7 @@ export const userSignUpRequest = (userSignUpData, history) => async dispatch => 
 export const userLoginRequest = (userLoginData, history) => async dispatch => {
     try {
         const response = await axios.post("http://localhost:4000/api/users/login/", userLoginData);
-        console.log("user login res", response);
+        //console.log("user login res", response);
 
         localStorage.setItem('token', `${response.data.token}`);
         localStorage.setItem('isAuthenticated', true);
@@ -58,10 +59,10 @@ export const userLoginRequest = (userLoginData, history) => async dispatch => {
         });
     } catch (error) {
         console.log('error=>',error.response)
-        dispatch({
-            type: GET_ERRORS,
-            payload: error.response.data
-        });
+        // dispatch({
+        //     type: GET_ERRORS,
+        //     payload: error.response.data
+        // });
     }
 };
 
@@ -78,4 +79,21 @@ export const userLogoutRequest = (history) => dispatch => {
     dispatch({
         type: USER_LOGOUT
     });
-}
+};
+
+export const getAllProductRequest = () => async dispatch => {
+    try {
+        const response = await axios.get("http://localhost:4000/api/product/getProducts");
+        console.log(response.data.results);
+        dispatch({
+            type: GET_PRODUCTS,
+            payload: response.data,
+        });
+    } catch (error) {
+        console.log('error=>',error.response)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        });
+    }
+};

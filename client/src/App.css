@@ -51,6 +51,10 @@
   padding: 10px;
 }
 /* upload product*/
+
+.selection-box:focus{
+  outline: none;
+}
 .icon-plus{
   width: 100%;
   height: 300px;
@@ -79,3 +83,21 @@
   max-height: 100%;
   display: block;
 }
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+
+/** Dashboard */
+.image-content{
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.image-content>img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+  

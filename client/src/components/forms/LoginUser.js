@@ -32,6 +32,7 @@ render() {
 
 const {error}=this.props;
 const{userDetails}=this.props.userFromCombineReducer;
+const{userLogoutDetails}=this.props.userFromCombineReducer;
 // console.log('error from login page',this.props.error)
 console.log('details in LoginUser page',this.props.userFromCombineReducer)
 
@@ -49,6 +50,13 @@ const successalert =(
     <strong>Hurray!</strong> {userDetails.message}
 </div>
 );
+const logoutalert =(
+    <div className="alert alert-warning alert-dismissible">
+        <button type="button" className="close" data-dismiss="alert">&times;</button>
+        <strong>Hurray!</strong> {userLogoutDetails.message}
+    </div>
+    );
+
 return (
 <div className="container">
     <div className="row">
@@ -60,8 +68,11 @@ return (
                 error.message && (errorAlert)
                 }
                 {
-                userDetails.message && (successalert)
+                    userLogoutDetails && (logoutalert)
                 }
+                {/* {
+                userDetails.message && (successalert)
+                } */}
                 <form onSubmit={this.onSubmit}>
                     <div className="input-group">
                         <div className="input-group-prepend">

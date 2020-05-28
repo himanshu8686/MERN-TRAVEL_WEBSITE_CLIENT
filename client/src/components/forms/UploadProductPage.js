@@ -77,21 +77,21 @@ class UploadProductPage extends Component {
                                         <label>Title</label>
                                         <input type="text" className="form-control" onChange={this.onChange}
                                             name="title" name="productTitle" value={this.state.productTitle}
-                                            placeholder="Enter title for product"></input>
+                                            placeholder="Enter title for product" required></input>
                                     </div>
                                 
                                 <div className="form-group">
                                     <label for="comment">Description</label>
                                     <textarea className="form-control" name="productDescription"
                                         onChange={this.onChange} value={this.state.productDescription} rows="5"
-                                        id="comment"></textarea>
+                                        id="comment" required></textarea>
                                 </div>
 
                                 <div className="form-group">
                                     <label for="comment">Price</label>
                                     <input type="number" name="productPrice" onChange={this.onChange}
                                         value={this.state.productPrice} className="form-control"
-                                        placeholder="Enter Price"></input>
+                                        placeholder="Enter Price" required></input>
                                 </div>
 
                                 <div className="form-group">

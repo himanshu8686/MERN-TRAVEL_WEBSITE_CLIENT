@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
         const userLinks =(
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <div className="navbar-nav">
-                    <a href="/" className="nav-item nav-link active"><i className="fas fa-home"></i>Home</a>
+                    <a href="/dashboard" className="nav-item nav-link active"><i className="fas fa-home"></i>Dashboard</a>
                 </div>
 
                 <div className="navbar-nav ml-auto">
