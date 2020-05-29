@@ -14,7 +14,11 @@ function Dashboard() {
      * useEffect also allows us to combine componentDidMount and componentDidUpdate.
      */
     useEffect(()=>{
-
+        window.history.pushState(null, document.title, window.location.href);
+        window.addEventListener('popstate', function (event){
+            window.history.pushState(null, document.title,  window.location.href);
+        });
+        
         const variables ={
             skip:Skip,
             limit:Limit,
