@@ -81,19 +81,19 @@ export const userLogoutRequest = (history) => dispatch => {
     });
 };
 
-export const getAllProductRequest = () => async dispatch => {
-    try {
-        const response = await axios.get("http://localhost:4000/api/product/getProducts");
-        console.log(response.data.results);
-        dispatch({
-            type: GET_PRODUCTS,
-            payload: response.data,
-        });
-    } catch (error) {
-        console.log('error=>',error.response)
-        dispatch({
-            type: GET_ERRORS,
-            payload: error.response.data
-        });
-    }
-};
+// export const getAllProductRequest = () => async dispatch => {
+//     try {
+//         const response = await axios.get("http://localhost:4000/api/product/getProducts");
+//         console.log(response.data.results);
+//         dispatch({
+//             type: GET_PRODUCTS,
+//             payload: response.data,
+//         });
+//     } catch (error) {
+//         console.log('error=>',error.response)
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: error.response.data
+//         });
+//     }
+// };

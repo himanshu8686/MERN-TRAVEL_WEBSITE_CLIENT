@@ -1,12 +1,11 @@
-import { USER_SIGNUP,USER_LOGIN, USER_LOGOUT, GET_PRODUCTS} from '../actions/userActionsTypes';
+import { USER_SIGNUP,USER_LOGIN, USER_LOGOUT} from '../actions/userActionsTypes';
 
 const initialState={
     userDetails:{},
     isAuthenticated:false,
     currentUserDetails:{},
     userLoginDetails:{},
-    userLogoutDetails:{},
-    products:[]
+    userLogoutDetails:{}
 
 }
 export default function(state=
@@ -37,11 +36,11 @@ export default function(state=
                 currentUserDetails:{}
             };
 
-            case GET_PRODUCTS:
-            return {
-                ...state,
-                products: action.payload
-            };
+            // case GET_PRODUCTS:
+            // return {
+            //     ...state,
+            //     products: action.payload
+            // };
 
         default:
             return state;

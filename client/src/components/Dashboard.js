@@ -1,79 +1,77 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {getAllProductRequest} from '../actions/userActionCreators';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 
-class Dashboard extends Component {
-    
-     /**
-     *  disable back routing after entering on dashboard page
-     */
-    componentDidMount() {
-        window.history.pushState(null, document.title, window.location.href);
-        window.addEventListener('popstate', function (event){
-            window.history.pushState(null, document.title,  window.location.href);
-        });
+function Dashboard() {
 
-        this.props.getAllProductRequest();
-    }
+    const [Products, setProducts]= useState([])
 
     /**
-     *  this method render cardds is responsible for having card on dashboard
+     * useEffect is short for ‘use side effect’. Effects are when our application reacts with the outside world,
+     * like working with an API. It allows us to run a function based on whether something changed.
+     * useEffect also allows us to combine componentDidMount and componentDidUpdate.
      */
-    renderCards = this.props.userFromCombineReducer.products.results.map((product,index)=>{
-        return <div className="col-lg-4 col-md-6 col-sm-12">
-        <div className="card">
-              <div className="image-content">
-              {
-                  product.Images.map((image,indexOfImage)=>(
-                          <img key={indexOfImage} src={`http://localhost:4000/${image}`} alt={`productimage-${index}`}></img>
-                  ))
-              }
-              </div>
-              
-                <div className="card-bottom">
-                <h5 className="text-center">{product.productTitle}</h5>
-                <p className="text-secondary">{`$${product.productPrice}`}</p>
+    useEffect(()=>{
+        Axios.post("http://localhost:4000/api/product/getProducts")
+        .then(response=>{
+            if (response.data.success)
+            {
+                setProducts(response.data.results)
+                console.log(response.data.results)
+            }else{
+                alert('Failed to fetch product data')
+            }
+        })
+    },[])
+
+const renderCards = Products.map((product,index)=>{
+    return <div className="col-lg-4 col-md-6 col-sm-12 my-3">
+                <div className="card">
+                    <div className="image-content">
+                    {
+                        product.Images.map((image,indexOfImage)=>(
+                                <img key={indexOfImage} src={`http://localhost:4000/${image}`} alt={`productimage-${index}`}></img>
+                        ))
+                    }
+                    </div>
+                    
+                        <div className="card-bottom">
+                        <h5 className="text-center">{product.productTitle}</h5>
+                        <p className="text-secondary">{`$${product.productPrice}`}</p>
+                        </div>
                 </div>
-          </div>
-    </div>
-    })
+            </div>
+})
 
-    render() {
-        const{products} =this.props.userFromCombineReducer
-        const{results}=this.props.userFromCombineReducer.products
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-1"></div>
-                        <div className="col-md-10">
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-md-1"></div>
+                <div className="col-md-10">
 
-                            <h3 className="text-center">Lets TRAVEL <i className="fas fa-suitcase-rolling"></i></h3>
-                            
-                            {/* Filter */}
-                             {/* Search */}
+                    <h3 className="text-center">Lets TRAVEL <i className="fas fa-suitcase-rolling"></i></h3>
+                    <br></br>
 
-                             {
-                                products.total_results === 0 ? 
+                    {/* filter  */}
+                    {/* search */}
+
+                            {
+                                Products.length === 0 ? 
                                 <div className="text-center">No Products to display! </div>
                                 :
                                 <div className="row">
-                                   {this.renderCards}
+                                   {renderCards}
                                 </div>
                             }
-                    <br></br>
-                        <div className="text-center">
-                            <button className="btn btn-outline-secondary">Load More</button>
+
+                    <div className="text-center">
+                        <button className="btn btn-outline-secondary">Load more</button>
                         </div>
-                        </div>
-                   
-                    <div className="col-md-1"></div>
                 </div>
+
+                <div className="col-md-1"></div>
             </div>
-        );
-    }
+        </div>
+    );
 }
-const mapStateToProps = state=>({
-    error:state.error,
-    userFromCombineReducer:state.userFromCombineReducer // user is from combine reducer
-});
-export default connect(mapStateToProps,{getAllProductRequest})(Dashboard)
+
+export default Dashboard;
