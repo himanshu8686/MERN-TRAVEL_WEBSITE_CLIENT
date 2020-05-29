@@ -4,6 +4,9 @@ import Axios from 'axios';
 function Dashboard() {
 
     const [Products, setProducts]= useState([])
+    const [Skip,setSkip] = useState(0)
+    const [Limit,setLimit] = useState(3) //initially i just want to show 3 cards
+    const [PostSize,setPostSize]= useState(0)
 
     /**
      * useEffect is short for ‘use side effect’. Effects are when our application reacts with the outside world,
@@ -11,17 +14,46 @@ function Dashboard() {
      * useEffect also allows us to combine componentDidMount and componentDidUpdate.
      */
     useEffect(()=>{
-        Axios.post("http://localhost:4000/api/product/getProducts")
+
+        const variables ={
+            skip:Skip,
+            limit:Limit,
+            
+        }
+      getProducts(variables)
+    },[])
+
+    /**
+     * 
+     */
+    const getProducts=(variables)=>{
+        Axios.post("http://localhost:4000/api/product/getProducts",variables)
         .then(response=>{
             if (response.data.success)
             {
-                setProducts(response.data.results)
-                console.log(response.data.results)
+                setProducts(Products.concat(response.data.results))
+                setPostSize(response.data.total_results)
             }else{
                 alert('Failed to fetch product data')
             }
         })
-    },[])
+    }
+
+    /**
+     * 
+     */
+    const onLoadMore=()=>{
+        let skip= Skip + Limit;
+
+        const variables ={
+            skip:skip,
+            limit:Limit,
+
+        }
+        getProducts(variables)
+        setSkip(skip)
+    }
+
 
 const renderCards = Products.map((product,index)=>{
     return <div className="col-lg-4 col-md-6 col-sm-12 my-3">
@@ -49,7 +81,7 @@ const renderCards = Products.map((product,index)=>{
                 <div className="col-md-10">
 
                     <h3 className="text-center">Lets TRAVEL <i className="fas fa-suitcase-rolling"></i></h3>
-                    <br></br>
+                    
 
                     {/* filter  */}
                     {/* search */}
@@ -62,10 +94,15 @@ const renderCards = Products.map((product,index)=>{
                                    {renderCards}
                                 </div>
                             }
+                    <br></br>
 
-                    <div className="text-center">
-                        <button className="btn btn-outline-secondary">Load more</button>
+                    {
+                        PostSize >= Limit && 
+                        <div className="text-center">
+                        <button className="btn btn-outline-secondary" onClick={onLoadMore}>Load more</button>
                         </div>
+                    }
+                    
                 </div>
 
                 <div className="col-md-1"></div>
