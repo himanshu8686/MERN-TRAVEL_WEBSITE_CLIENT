@@ -18,7 +18,7 @@ class UploadProductPage extends Component {
            productTitle:'',
            productDescription:'',
            productPrice:'',
-           continent:(1),
+           continents:(1),
            Images:[]
         }
     }
@@ -40,7 +40,7 @@ class UploadProductPage extends Component {
             productTitle:this.state.productTitle,
             productDescription:this.state.productDescription,
             productPrice:this.state.productPrice,
-            continent:this.state.continent,
+            continents:this.state.continents,
             Images:this.state.Images
         }
 

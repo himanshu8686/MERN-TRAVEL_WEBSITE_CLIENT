@@ -100,4 +100,13 @@
   display: block;
 }
 
+/** checkboxes*/
+a.card-link> i.fas.fa-chevron-circle-down{
+  transform: rotate(360deg);
+  transition: .5s ease-in-out
+  }
   
+  a.card-link.collapsed > i.fas.fa-chevron-circle-down{
+  transform: rotate(180deg);
+  transition: .5s ease-in-out
+  }
