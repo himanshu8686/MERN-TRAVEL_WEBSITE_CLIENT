@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 
-const continents=[
-    {"_id":1,"name" : "Africa"},
-    {"_id":2,"name":"Asia"},
-    {"_id":3,"name":"Europe"},
-    {"_id":4,"name":"North America"},
-    {"_id":5,"name":"South America"},
-    {"_id":6,"name":"Australia"},
-    {"_id":7,"name":"Antartica"}
-]
+
 
 function CheckBoxData(props) {
 
@@ -31,7 +23,7 @@ function CheckBoxData(props) {
         props.handleFilters(newChecked)
     }
     
-const renderCheckBoxlists =() => continents.map((value,index)=>(
+const renderCheckBoxlists =() => props.list && props.list.map((value,index)=>(
     <div className="form-check-inline">
         <label className="form-check-label">
             <input type="checkbox" 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import CheckBoxData from './utils/CheckBoxData';
+import RadioBoxPrice from './utils/RadioBoxPrice';
+import {continents,productPrice} from './utils/Datas';
 
 function Dashboard() {
 
@@ -10,7 +12,7 @@ function Dashboard() {
     const [PostSize,setPostSize]= useState(0)
     const [Filters,setFilters] = useState({
         continents:[],
-        price:[]
+        productPrice:[]
     })
 
     /**
@@ -95,17 +97,32 @@ const renderCards = Products.map((product,index)=>{
      * @param {*} category contains {continents[], price[]}
      */
     const handleFilters=(filters,category)=>{
-        // console.log('filters',filters)
+         //console.log('filters',filters)
         const newFilters = { ...Filters}
         newFilters[category] = filters
-        // console.log('new filters',newFilters)
+        //console.log('new filters',newFilters)
 
-        if (category === "price") {
-            
+        if (category === "productPrice") {
+           let priceValues = handlePrice(filters)
+           newFilters[category] = priceValues
         }
 
+        console.log("--",newFilters)
         showFilteredResults(newFilters)
         setFilters(newFilters)
+    }
+
+    const handlePrice=(value)=>{
+        const data = productPrice;
+        let array=[];
+        for (const key in data) {
+            console.log("value",value);
+            if (data[key]._id === parseInt(value,10)) {
+                array = data[key].array
+            }
+        }
+        console.log("array",array)
+        return array;
     }
 
      /**
@@ -133,10 +150,15 @@ const renderCards = Products.map((product,index)=>{
 
                         <div className="row">
                             <div className="col-md-6">
-                                <CheckBoxData handleFilters={filters=> handleFilters(filters,"continents")}></CheckBoxData>
+                                <CheckBoxData 
+                                list={continents} 
+                                handleFilters={filters=> handleFilters(filters,"continents")}></CheckBoxData>
                             </div>
-                        <div className="col-md-6 bg-secondary">
+                        <div className="col-md-6">
                             {/* search */}
+                            <RadioBoxPrice 
+                            list={productPrice}
+                            handleFilters={filters=> handleFilters(filters,"productPrice")}></RadioBoxPrice>
                         </div>
                         </div>
                                 {
